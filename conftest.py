@@ -5,10 +5,12 @@ from pathlib import Path
 # 1. Local src/ package is importable
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-# 2. Set env-var defaults BEFORE src.server is imported (module-level MCPConfig.from_env())
+# 2. Set env-var defaults BEFORE src.server is imported (module-level MCPConfig.load())
 _defaults = {
-    "OPA_URL": "http://localhost:8181/v1/data/mcp/tools/allow",
+    "ENVIRONMENT": "dev",
+    "CONFIG_DIR": str(Path(__file__).resolve().parent / "config"),
     "INTERNAL_API_KEY": "test-key",
+    "REDIS_PASSWORD": "test-redis-password",
     "MCP_TRANSPORT": "sse",
 }
 for k, v in _defaults.items():
