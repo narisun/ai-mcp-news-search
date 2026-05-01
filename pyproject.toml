@@ -1,10 +1,10 @@
 [project]
 name = "ai-mcp-news-search"
-version = "0.4.0"
+version = "0.6.0"
 description = "Enterprise AI Platform — News Search MCP (Tavily-backed)"
 requires-python = ">=3.11"
 dependencies = [
-    "enterprise-ai-platform-sdk @ git+ssh://git@github.com/narisun/ai-platform-sdk.git@v0.4.0",
+    "enterprise-ai-platform-sdk @ git+ssh://git@github.com/narisun/ai-platform-sdk.git@v0.6.0",
     "tavily-python>=0.3.0,<1.0.0",
 ]
 

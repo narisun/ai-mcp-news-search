@@ -29,7 +29,9 @@ def env_vars(monkeypatch):
     """Supply all required env vars and bypass real external connections."""
     monkeypatch.setenv("OPA_URL", "http://localhost:8181/v1/data/mcp/tools/allow")
     monkeypatch.setenv("INTERNAL_API_KEY", "test-key")
+    monkeypatch.setenv("REDIS_PASSWORD", "test-redis-password")
     monkeypatch.setenv("MCP_TRANSPORT", "sse")
+    monkeypatch.setenv("ENVIRONMENT", "dev")
 
 
 def _make_opa_mock(authorized: bool) -> MagicMock:

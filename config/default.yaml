@@ -1,0 +1,21 @@
+environment: dev
+service_name: news-search-mcp
+agent_role: data_analyst_agent
+transport: sse
+port: 8083
+
+opa_url: http://opa:8181/v1/data/mcp/tools/allow
+opa_timeout_seconds: 2.0
+
+max_result_bytes: 15000
+enable_tool_cache: true
+tool_cache_ttl_seconds: 300
+
+# news-search has no DB; redis is used as cache backend.
+redis_host: redis
+redis_port: 6379
+redis_password: ${REDIS_PASSWORD}
+
+registry_url: http://ai-registry:8090
+service_url: http://news-search-mcp:8083
+service_version: "0.6.0"
