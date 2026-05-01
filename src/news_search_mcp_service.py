@@ -7,7 +7,6 @@ Extends McpService to handle:
 - Delegation to NewsSearchService for business logic
 """
 import json
-import os
 from contextvars import ContextVar
 from dataclasses import dataclass
 from typing import Any, Optional
@@ -65,7 +64,7 @@ class NewsSearchMcpService(McpService):
         """Initialize the news service during startup."""
         # Get or create Tavily client
         tavily_client = None
-        tavily_key = os.environ.get("TAVILY_API_KEY", "")
+        tavily_key = getattr(self.config, "tavily_api_key", "")
         if tavily_key:
             try:
                 from tavily import TavilyClient
@@ -74,7 +73,7 @@ class NewsSearchMcpService(McpService):
             except ImportError:
                 log.warning("tavily_not_installed", fallback="mock")
         else:
-            log.info("news_mcp_ready", mode="mock", reason="TAVILY_API_KEY not set")
+            log.info("news_mcp_ready", mode="mock", reason="tavily_api_key not set")
 
         # Create the business logic service
         self.news_service = NewsSearchService(tavily_client=tavily_client)
@@ -99,7 +98,7 @@ class NewsSearchMcpService(McpService):
             Returns headlines, summaries, source URLs, and business signal
             classifications (expansion, risk, regulatory, financial_stress, etc.).
 
-            Uses Tavily Search API when TAVILY_API_KEY is configured.
+            Uses Tavily Search API when tavily_api_key is configured.
             Falls back to curated mock data for local development.
 
             Args:

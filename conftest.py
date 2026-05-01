@@ -12,6 +12,7 @@ _defaults = {
     "INTERNAL_API_KEY": "test-key",
     "REDIS_PASSWORD": "test-redis-password",
     "MCP_TRANSPORT": "sse",
+    "TAVILY_API_KEY": "",  # empty => mock-data path in tests
 }
 for k, v in _defaults.items():
     os.environ.setdefault(k, v)
