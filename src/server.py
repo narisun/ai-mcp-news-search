@@ -1,10 +1,10 @@
-"""
-Backward-compatible entry point for news-search-mcp server.
+"""Backwards-compat entrypoint shim. Delegates to src.main.
 
-This module maintains the original server.py interface while delegating
-to the refactored OOP architecture. It can be imported or executed directly.
+Uses service.run_with_registration so the MCP registers with the platform
+registry at process startup (FastMCP's SSE lifespan only runs per-connection,
+which is too late). See SDK 0.5.1 for details.
 """
-from .main import TRANSPORT, mcp
+from .main import TRANSPORT, mcp, service
 
 if __name__ == "__main__":
-    mcp.run(transport=TRANSPORT)
+    service.run_with_registration(mcp, TRANSPORT)
