@@ -19,3 +19,4 @@ redis_password: ${REDIS_PASSWORD}
 registry_url: http://ai-registry:8090
 service_url: http://news-search-mcp:8083
 service_version: "0.6.0"
+internal_api_key: ${INTERNAL_API_KEY}
